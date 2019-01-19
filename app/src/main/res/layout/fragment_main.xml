@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainFragment">
+
+    <!--Content-->
+    <LinearLayout
+        android:layout_margin="@dimen/m1"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!--Logo-->
+        <ImageView
+            android:src="@drawable/logo1"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <!--Title-->
+        <TextView
+            android:layout_margin="10dp"
+            android:layout_gravity="center_horizontal"
+            android:textStyle="bold"
+            android:textSize="@dimen/h1"
+            android:text="@string/app_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <!--User-->
+        <EditText
+            android:id="@+id/edtUser"
+            android:inputType="text"
+            android:hint="@string/user"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <!--Password-->
+        <EditText
+            android:id="@+id/edtPassword"
+            android:inputType="textPassword"
+            android:hint="@string/password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <!--Remember-->
+        <CheckBox
+            android:id="@+id/chbRemember"
+            android:text="Remember Me"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <!--Login-->
+        <Button
+            android:id="@+id/btnLogin"
+            android:text="Login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <!--New Register-->
+        <TextView
+            android:id="@+id/txtRegister"
+            android:clickable="true"
+            android:textColor="@color/colorAccent"
+            android:layout_marginTop="10dp"
+            android:textSize="@dimen/h3"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/new_register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+    </LinearLayout>
+
+
+
+</FrameLayout>
