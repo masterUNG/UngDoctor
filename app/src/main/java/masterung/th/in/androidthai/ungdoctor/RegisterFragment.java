@@ -11,7 +11,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.Spinner;
 
 
 /**
@@ -22,6 +27,8 @@ public class RegisterFragment extends Fragment {
     //    Explicit
     private String nameString, surnameString, genderString,
             heightString, weightString, ageString, userString, passwordString;
+    private boolean genderBool = true, heightABoolean = true, weightABoolean = true, ageABoolean = true;
+
 
     public RegisterFragment() {
         // Required empty public constructor
@@ -44,6 +51,46 @@ public class RegisterFragment extends Fragment {
             }
         });
         setHasOptionsMenu(true);
+
+        //        About Gender
+        RadioGroup radioGroup = getView().findViewById(R.id.ragGender);
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                genderBool = false;
+                switch (checkedId) {
+                    case R.id.radMale:
+                        genderString = "Male";
+                        break;
+                    case R.id.radFemale:
+                        genderString = "Female";
+                        break;
+                }
+            }
+        });
+
+
+        //        About Height
+        Spinner heightSpinner = getView().findViewById(R.id.spnHeight);
+        final String[] heightStrings = {"Please Choose Height", " below 150", "151-170", "Over 170"};
+        ArrayAdapter<String> heightStringArrayAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, heightStrings);
+        heightSpinner.setAdapter(heightStringArrayAdapter);
+        heightSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                heightString = heightStrings[position];
+                if (position == 0) {
+                    heightABoolean = true;
+                } else {
+                    heightABoolean = false;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
 
     }   // Main Method
@@ -74,9 +121,16 @@ public class RegisterFragment extends Fragment {
 
         MyAlert myAlert = new MyAlert(getActivity());
 
+
+//        เช็คความว่างเปล่า, gender, height, weight, age
         if (nameString.isEmpty() || surnameString.isEmpty() || userString.isEmpty() || passwordString.isEmpty()) {
 //            Have Space
             myAlert.normalDialog("Have Space", "Please Fill Every Blank");
+        } else if (genderBool) {
+//            Non Choose Gender
+            myAlert.normalDialog("Non Choose Gender", "Please Choose Male or Female");
+        } else if (heightABoolean) {
+            myAlert.normalDialog("Non Choose Height", "Please Choose Height");
         }
 
 
