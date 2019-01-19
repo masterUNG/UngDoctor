@@ -39,20 +39,9 @@ public class RegisterFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
 //        Create Toolbar
-        Toolbar toolbar = getView().findViewById(R.id.toolbarRegister);
-        ((MainActivity) getActivity()).setSupportActionBar(toolbar);
-        ((MainActivity) getActivity()).getSupportActionBar().setTitle(getString(R.string.new_register));
-        ((MainActivity) getActivity()).getSupportActionBar().setHomeButtonEnabled(true);
-        ((MainActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getActivity().getSupportFragmentManager().popBackStack();
-            }
-        });
-        setHasOptionsMenu(true);
+        createToolbar();
 
-        //        About Gender
+//        About Gender
         RadioGroup radioGroup = getView().findViewById(R.id.ragGender);
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -94,6 +83,21 @@ public class RegisterFragment extends Fragment {
 
 
     }   // Main Method
+
+    private void createToolbar() {
+        Toolbar toolbar = getView().findViewById(R.id.toolbarRegister);
+        ((MainActivity) getActivity()).setSupportActionBar(toolbar);
+        ((MainActivity) getActivity()).getSupportActionBar().setTitle(getString(R.string.new_register));
+        ((MainActivity) getActivity()).getSupportActionBar().setHomeButtonEnabled(true);
+        ((MainActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().getSupportFragmentManager().popBackStack();
+            }
+        });
+        setHasOptionsMenu(true);
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
