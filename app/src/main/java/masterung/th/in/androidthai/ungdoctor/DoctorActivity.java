@@ -28,6 +28,10 @@ public class DoctorActivity extends AppCompatActivity {
 
         getUser();
 
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction().add(R.id.contentDoctorFragment, new AboutMeFragment()).commit();
+        }
+
     }   // Main Method
 
     @Override
