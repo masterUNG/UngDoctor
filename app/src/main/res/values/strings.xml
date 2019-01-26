@@ -9,5 +9,7 @@
 
     <string name="open">Open Drawer</string>
     <string name="close">Close Drawer</string>
+    <string name="analysis">วินิฉัยโรค</string>
+    <string name="sick">โรค</string>
 
 </resources>
