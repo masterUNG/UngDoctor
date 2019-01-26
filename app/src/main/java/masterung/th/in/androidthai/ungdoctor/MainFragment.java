@@ -4,12 +4,16 @@ package masterung.th.in.androidthai.ungdoctor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 
 /**
@@ -45,11 +49,36 @@ public class MainFragment extends Fragment {
 
                 String user = userEditText.getText().toString().trim();
                 String password = passwordEditText.getText().toString().trim();
+                String urlPHP = "https://www.androidthai.in.th/sam/getUserWhereUserMaster.php";
+                boolean userAbool = true;
 
                 if (user.isEmpty() || password.isEmpty()) {
                     myAlert.normalDialog("Have Space", "Please Fill All Every Blank");
                 } else {
+                    try {
 
+                        GetUserWhereUserThread getUserWhereUserThread = new GetUserWhereUserThread(getActivity());
+                        getUserWhereUserThread.execute(user, urlPHP);
+                        String json = getUserWhereUserThread.get();
+                        Log.d("26JanV1", "json ==> " + json);
+
+                        if (json.equals("null")) {
+                            myAlert.normalDialog("User False", "No " + user + " in my Database");
+                        } else {
+                            JSONArray jsonArray = new JSONArray(json);
+                            JSONObject jsonObject = jsonArray.getJSONObject(0);
+
+                            if (password.equals(jsonObject.getString("Password"))) {
+
+                            } else {
+                                myAlert.normalDialog("Password False", "Please Try Again Password False");
+                            }
+
+                        }   // if
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         });
